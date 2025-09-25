@@ -1,0 +1,62 @@
+<div class="container">
+  <h2>CRUD de Usuarios</h2>
+
+  <!-- Botón para abrir el modal -->
+  <button (click)="openModal()">Agregar Usuario</button>
+  <p *ngIf="statusMessage">{{ statusMessage }}</p>
+  
+
+  <!-- Modal -->
+  <div class="modal" [class.show]="showModal">
+    <div class="modal-content">
+      <span class="close" (click)="closeModal()">&times;</span>
+      <h3>{{ isEditing ? 'Editar Usuario' : 'Agregar Usuario' }}</h3>
+
+      <form (ngSubmit)="saveUser()">
+        <input type="text" placeholder="Nombre" [(ngModel)]="currentUser.name" name="name" required>
+        <input type="email" placeholder="Correo" [(ngModel)]="currentUser.email" name="email" required>
+        <input type="text" placeholder="Teléfono" [(ngModel)]="currentUser.telefono" name="telefono" required>
+        
+        <select [(ngModel)]="currentUser.role" name="role" required>
+          <option value="admin">Admin</option>
+          <option value="user">Usuario</option>
+          <option value="guest">Invitado</option>
+        </select>
+
+        <input type="date" [(ngModel)]="currentUser.fechaNacimiento" name="fechaNacimiento" required>
+        <input type="text" placeholder="DNI" [(ngModel)]="currentUser.DNI" name="DNI" required>
+        <input type="text" placeholder="Dirección" [(ngModel)]="currentUser.direccion" name="direccion" required>
+        <input type="text" placeholder="Ciudad" [(ngModel)]="currentUser.ciudad" name="ciudad" required>
+        <input type="text" placeholder="Distrito" [(ngModel)]="currentUser.distrito" name="distrito" required>
+
+        <button type="submit" [disabled]="loading">
+          {{ isEditing ? 'Actualizar' : 'Agregar' }}
+        </button>
+      </form>
+    </div>
+  </div>
+  <div *ngIf="loading" class="loading">
+    ⏳ Procesando...
+  </div>
+  <!-- Tabla de usuarios -->
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th><th>Nombre</th><th>Email</th><th>Teléfono</th><th>Rol</th><th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td>{{ user.id }}</td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.telefono }}</td>
+        <td>{{ user.role }}</td>
+        <td>
+          <button (click)="editUser(user)" [disabled]="loading">Editar</button>
+          <button (click)="deleteUser(user.id)" [disabled]="loading">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

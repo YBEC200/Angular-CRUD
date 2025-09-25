@@ -1,0 +1,22 @@
+<h2>Dashboard</h2>
+
+<h3>Usuarios</h3>
+<ul>
+  @for (u of users; track u.id) {
+    <li>{{ u.name }} - {{ u.role }}</li>
+  }
+</ul>
+
+<h3>Roles</h3>
+<ul>
+  @for (r of roles; track r) {
+    <li>{{ r }}</li>
+  }
+</ul>
+
+<h3>Ciudades disponibles</h3>
+<ul>
+  @for (c of ciudades; track c) {
+    <li>{{ c }}</li>
+  }
+</ul>
