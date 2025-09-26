@@ -76,13 +76,13 @@ export class UserCrudComponent implements OnInit, OnDestroy {
         refreshed: this.userService.loadUsers()
       }).subscribe({
         next: () => {
-          this.loading = false; // Ocultar indicador de carga
+          this.loading = false;
           this.resetForm();
           this.closeModal();
           this.statusMessage = '✅ Usuario agregado con éxito';
         },
         error: () => {
-          this.loading = false; // Ocultar indicador de carga
+          this.loading = false;
           this.statusMessage = '❌ Error al agregar el usuario';
         }
       });
